@@ -19,8 +19,11 @@ public class Typos {
         }
         @Test
         public void testTypos() {
+            // Open site http://the-internet.herokuapp.com/typos
             driver.get(HEROCU_APP_URL);
+            // Find text by xpath
             WebElement typos = driver.findElement(By.xpath("//*[@id=\"content\"]/div/p[2]"));
+            // Check text on errors
             String actualTypos = typos.getText();
             String expectedTypos = "Sometimes you'll see a typo, other times you won't.";
             Assert.assertEquals(actualTypos, expectedTypos, "Typo in a word - don't");
