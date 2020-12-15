@@ -33,8 +33,8 @@ public class Hovers {
         String actualPage = driver.findElement(By.xpath("/html/body/h1")).getText();
         String exceptedPage = "Not Found";
         Assert.assertEquals(actualPage, exceptedPage, "Not contains error 404");
-        //Close driver
-        driver.close();
+        //Quit driver
+        driver.quit();
     }
 
     @Test
@@ -50,8 +50,8 @@ public class Hovers {
         String actualPage = driver.findElement(By.xpath("/html/body/h1")).getText();
         String exceptedPage = "Not Found";
         Assert.assertEquals(actualPage, exceptedPage, "Not contains error 404");
-        //Close driver
-        driver.close();
+        //Quit driver
+        driver.quit();
     }
 
     @Test
@@ -67,8 +67,8 @@ public class Hovers {
         String actualPage = driver.findElement(By.xpath("/html/body/h1")).getText();
         String exceptedPage = "Not Found";
         Assert.assertEquals(actualPage, exceptedPage, "Not contains error 404");
-        //Close driver
-        driver.close();
+        //Quit driver
+        driver.quit();
     }
 }
 
