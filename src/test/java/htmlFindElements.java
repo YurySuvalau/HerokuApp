@@ -15,10 +15,7 @@ public class htmlFindElements {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-
-
     }
-
     @Test
     public void htmlFindElementTable() {
         driver.get(Mysite);
