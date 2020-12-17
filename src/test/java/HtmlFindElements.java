@@ -1,14 +1,16 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class htmlFindElements {
+public class HtmlFindElements {
     WebDriver driver;
-    private static final String Mysite = "C:\\Users\\Бубята\\IdeaProjects\\HerokuApp\\src\\test\\resources\\Test.html";
+    private static final String MY_SITE = "C:\\Users\\Бубята\\IdeaProjects\\HerokuApp\\src\\test\\resources\\Test.html";
 
     @BeforeMethod
     public void initMethod() {
@@ -18,23 +20,24 @@ public class htmlFindElements {
     }
     @Test
     public void htmlFindElementTable() {
-        driver.get(Mysite);
-        String actualResult = driver.findElement(By.id("table01")).getAttribute("id");
-        Assert.assertEquals(actualResult, "table01");
+        driver.get(MY_SITE);
+        String actualResult = driver.findElement(By.xpath("//*[@id=\"table01\"]/tbody/tr[1]/th[1]")).getText();
+        Assert.assertEquals(actualResult, "Firstname");
         driver.quit();
     }
 
     @Test
     public void htmlFindElementInput() {
-        driver.get(Mysite);
-        String actualResult = driver.findElement(By.name("email")).getAttribute("name");
-        Assert.assertEquals(actualResult, "email");
+        driver.get(MY_SITE);
+        WebElement emailField = driver.findElement(By.name("email"));
+        String actualResults = emailField.getText();
+        Assert.assertEquals(actualResults, "Enter your email:");
         driver.quit();
     }
 
     @Test
     public void htmlFindElementCheckBox() {
-        driver.get(Mysite);
+        driver.get(MY_SITE);
         String actualResult = driver.findElement(By.xpath("//*[@id=\"form2\"]/label[1]")).getText();
         Assert.assertEquals(actualResult, "I live in apartment №1");
         driver.quit();
@@ -42,7 +45,7 @@ public class htmlFindElements {
 
     @Test
     public void htmlFindElementDropBox() {
-        driver.get(Mysite);
+        driver.get(MY_SITE);
         Select select = new Select(driver.findElement(By.id("name")));
         select.selectByVisibleText("Tom");
         String actualResult = select.getFirstSelectedOption().getText();
@@ -52,7 +55,7 @@ public class htmlFindElements {
 
     @Test
     public void htmlFindElementButton() {
-        driver.get(Mysite);
+        driver.get(MY_SITE);
         String actualResult = driver.findElement(By.id("ring")).getText();
         Assert.assertEquals(actualResult, "The ring!");
         driver.quit();
@@ -60,14 +63,14 @@ public class htmlFindElements {
 
     @Test
     public void htmlFindElementImg() {
-        driver.get(Mysite);
-        String actualResult = driver.findElement(By.xpath("/html/body/img")).getAttribute("alt");
-        Assert.assertEquals(actualResult, "The house");
+        driver.get(MY_SITE);
+        boolean actualResult = driver.findElement(By.xpath("/html/body/img")).isDisplayed();
+        Assert.assertTrue(actualResult);
         driver.quit();
     }
     @Test
     public void htmlFindElementLink() {
-        driver.get(Mysite);
+        driver.get(MY_SITE);
         String actualResult = driver.findElement(By.xpath("/html/body/a")).getText();
         Assert.assertEquals(actualResult, "Visit Google for search!");
         driver.quit();
