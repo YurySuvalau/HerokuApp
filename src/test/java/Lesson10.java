@@ -11,13 +11,17 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.io.File;
+
 public class Lesson10 {
     WebDriver driver;
-    private static final String HEROCU_APP_URL_CONTEXT_MENU = "http://the-internet.herokuapp.com/context_menu";
-    private static final String HEROCU_APP_URL_DYNAMIC_CONTROL = "http://the-internet.herokuapp.com/dynamic_controls";
-    private static final String HEROCU_APP_UPLOAD_FILE = "http://the-internet.herokuapp.com/upload";
-    private static final String HEROCU_APP_URL_IFRAME = "http://the-internet.herokuapp.com/iframe";
-
+    //URL constants
+    private static final String HEROCU_APP_URL_MAIN_PAGE = "http://the-internet.herokuapp.com";
+    private static final String HEROCU_APP_URL_CONTEXT_MENU = "/context_menu";
+    private static final String HEROCU_APP_URL_DYNAMIC_CONTROL = "/dynamic_controls";
+    private static final String HEROCU_APP_UPLOAD_FILE = "/upload";
+    private static final String HEROCU_APP_URL_IFRAME = "/iframe";
+    //Locators constants
     private static final String WHITE_BOX = "//*[@id='hot-spot']";
     private static final String CHECKBOX = "//*[@id='checkbox']";
     private static final String BUTTON_REMOVE_ADD = "//*[@id='checkbox-example']/button";
@@ -40,7 +44,7 @@ public class Lesson10 {
     @Test
     public void contextMenuTest() {
         //open page http://the-internet.herokuapp.com/context_menu
-        driver.get(HEROCU_APP_URL_CONTEXT_MENU);
+        driver.get(HEROCU_APP_URL_MAIN_PAGE + HEROCU_APP_URL_CONTEXT_MENU);
         //find dedicated box on page
         WebElement whiteBox = driver.findElement(By.xpath(WHITE_BOX));
         //Click on box by right button
@@ -61,7 +65,7 @@ public class Lesson10 {
     @Test
     public void dynamicControl() {
         //open page http://the-internet.herokuapp.com/dynamic_controls
-        driver.get(HEROCU_APP_URL_DYNAMIC_CONTROL);
+        driver.get(HEROCU_APP_URL_MAIN_PAGE + HEROCU_APP_URL_DYNAMIC_CONTROL);
         //find checkbox
         driver.findElement(By.xpath(CHECKBOX));
         //find button "Remove/add", and click it
@@ -84,9 +88,10 @@ public class Lesson10 {
     @Test
     public void uploadFileTest() {
         //open page http://the-internet.herokuapp.com/upload
-        driver.get(HEROCU_APP_UPLOAD_FILE);
+        driver.get(HEROCU_APP_URL_MAIN_PAGE + HEROCU_APP_UPLOAD_FILE);
         //find button "open file", and send absolute path to upload file
-        driver.findElement(By.id(FILE_UPLOAD_BUTTON)).sendKeys("C:\\Users\\Бубята\\IdeaProjects\\HerokuApp\\src\\test\\resources\\Lesson_4.jpg");
+        File file = new File("src/test/resources/Lesson_4.jpg");
+        driver.findElement(By.id(FILE_UPLOAD_BUTTON)).sendKeys(file.getAbsolutePath());
         //find and click button "Upload"
         driver.findElement(By.id(SUBMIT_UPLOAD_FILE_BUTTON)).click();
         //Chek uploaded file name
@@ -96,7 +101,7 @@ public class Lesson10 {
     @Test
     public void iFrameTest() {
         //open page
-        driver.get(HEROCU_APP_URL_IFRAME);
+        driver.get(HEROCU_APP_URL_MAIN_PAGE + HEROCU_APP_URL_IFRAME);
         //switch to iFrame
         driver.switchTo().frame(0);
         //check text in iFrame
